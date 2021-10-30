@@ -1,13 +1,15 @@
-all: cull-reviews
+all: data/reviews.csv
 
 data:
 	mkdir $@
 
 reviews: data
-	kaggle datasets download --path data -d ebiswas/imdb-review-dataset --unzip
+	kaggle datasets download --path data -d ebiswas/imdb-review-dataset
+	unzip -n data/imdb-review-dataset.zip -d data
 
 netflix: data
-	kaggle datasets download --path data -d shivamb/netflix-shows --unzip
+	kaggle datasets download --path data -d shivamb/netflix-shows
+	unzip -n data/netflix-shows.zip -d data
 
-cull-reviews: reviews netflix
+data/reviews.csv: reviews netflix
 	python3 reviews.py
