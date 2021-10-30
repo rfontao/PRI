@@ -13,7 +13,7 @@ inputs = [
 netflix = pd.read_csv(DATA_PATH + "netflix_titles.csv")
 titles = netflix["title"]
 
-pd.DataFrame().to_csv("out.csv", index=False, mode="w")
+pd.DataFrame().to_csv(DATA_PATH + "out.csv", index=False, mode="w")
 
 for index, file in enumerate(inputs):
     print("Started processing", file)
@@ -22,7 +22,7 @@ for index, file in enumerate(inputs):
     reviews["movie"].replace(" \([1-9]*.*", "", regex=True, inplace=True)
     reviews = reviews[reviews["movie"].isin(titles)]
 
-    reviews.to_csv("out.csv", index=False, header=(index == 0), mode="a")
+    reviews.to_csv(DATA_PATH + "out.csv", index=False, header=(index == 0), mode="a")
     print("Finished processing", file)
 
 
