@@ -1,3 +1,5 @@
+MIN_RELEASE_YEAR = 2015
+
 # Taken from https://stackoverflow.com/a/3077254/15177524
 REVIEWS = data/part-01.json% \
 			data/part-02.json% \
@@ -20,4 +22,4 @@ data/netflix_titles.csv: data
 	unzip -n data/netflix-shows.zip -d data
 
 data/reviews.csv: $(REVIEWS) data/netflix_titles.csv
-	python3 reviews.py
+	python3 reviews.py -y $(MIN_RELEASE_YEAR)
