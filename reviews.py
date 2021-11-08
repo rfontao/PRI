@@ -20,6 +20,7 @@ inputs = [
 netflix = pd.read_csv(DATA_PATH + "netflix_titles.csv")
 if args.min_release_year is not None:
     netflix = netflix[netflix["release_year"] > args.min_release_year]
+
 titles = netflix["title"]
 
 pd.DataFrame().to_csv(DATA_PATH + "reviews.csv", index=False, mode="w")
