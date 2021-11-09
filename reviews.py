@@ -1,6 +1,15 @@
 import argparse
 import pandas as pd
 
+
+def test(reviews):
+    # reviews["date"] = reviews["movie"].str.extract(r" \(([0-9]*).*")
+    # reviews["movie"] = reviews["movie"].str.extract(r"(.*) \([0-9]*.*")
+    # print(reviews)
+
+    print(reviews["movie"].str.extract(r" \(([0-9]{4}).*")["1500"])
+
+
 DATA_PATH = "data/"
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -29,8 +38,9 @@ for index, file in enumerate(inputs):
     print("Started processing", file)
     reviews = pd.read_json(DATA_PATH + file)
 
+    print(test(reviews))
     # Remove years at the end of the movies names
-    reviews["movie"].replace(" \([1-9]*.*", "", regex=True, inplace=True)
+    reviews["movie"].replace(r" \([1-9]*.*", "", regex=True, inplace=True)
 
     # Leave only shows that are on Netflix
     reviews = reviews[reviews["movie"].isin(titles)]
