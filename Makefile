@@ -21,11 +21,11 @@ data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles.csv reviews.p
 	python3 reviews.py
 
 
-data/reviews_clean.csv: data/reviews.csv
-	cp data/reviews.csv data/reviews_clean.csv
+data/reviews_clean.csv: data/reviews.csv cleanup_reviews.py
+	python3 cleanup_reviews.py
 
-data/netflix_titles_clean.csv: data/netflix_titles.csv cleanup.py
-	python3 cleanup.py
+data/netflix_titles_clean.csv: data/netflix_titles.csv cleanup_netflix.py
+	python3 cleanup_netflix.py
 
 
 .PHONY: cleanjson
