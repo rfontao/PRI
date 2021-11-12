@@ -3,7 +3,7 @@ import pandas as pd
 
 # TODO!!!! DATE_ADDED / DURATION / FIX TYPE ENUM /EXECUTE MANY/ ATORES REPETIDOS NUM SO FILME
 
-con = sqlite3.connect('test.db')
+con = sqlite3.connect('data/test.db')
 cur = con.cursor()
 cur.execute("BEGIN")
 
@@ -78,21 +78,21 @@ for idx, row in titles.iterrows():
     for g in get_genres(row["listed_in"]):
         cur.execute(
             "insert into genre_show(genre_id, show_id) values (?, ?)", (genres_dict[g], idx))
-    for p in get_persons(row["cast"]):
+    for p in set(get_persons(row["cast"])):
         if len(p) > 0:
-            cur.execute(
-                "select * from actor_show where actor_id = ? and show_id = ?", (persons_dict[p], idx))
-            if cur.fetchone() is None:
-                con.execute(
-                    "insert into actor_show(actor_id, show_id) values (?, ?)", (persons_dict[p], idx))
+            # cur.execute(
+            #     "select * from actor_show where actor_id = ? and show_id = ?", (persons_dict[p], idx))
+            # if cur.fetchone() is None:
+            con.execute(
+                "insert into actor_show(actor_id, show_id) values (?, ?)", (persons_dict[p], idx))
 
-    for p in get_persons(row["director"]):
+    for p in set(get_persons(row["director"])):
         if len(p) > 0:
+            # cur.execute(
+            #     "select * from director_show where director_id = ? and show_id = ?", (persons_dict[p], idx))
+            # if cur.fetchone() is None:
             cur.execute(
-                "select * from director_show where director_id = ? and show_id = ?", (persons_dict[p], idx))
-            if cur.fetchone() is None:
-                cur.execute(
-                    "insert into director_show(director_id, show_id) values (?, ?)", (persons_dict[p], idx))
+                "insert into director_show(director_id, show_id) values (?, ?)", (persons_dict[p], idx))
 
 for idx, row in reviews.iterrows():
 

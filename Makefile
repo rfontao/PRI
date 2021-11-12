@@ -27,6 +27,10 @@ data/reviews_clean.csv: data/reviews.csv
 data/netflix_titles_clean.csv: data/netflix_titles.csv cleanup.py
 	python3 cleanup.py
 
+db:
+	sqlite3 data/test.db < create.sql
+	python3 populate_db.py
+
 
 .PHONY: cleanjson
 cleanjson:
