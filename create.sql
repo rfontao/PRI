@@ -1,14 +1,16 @@
+PRAGMA foreign_keys = ON;
+
 DROP TABLE IF EXISTS show;
 CREATE TABLE show (
     id INTEGER PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    date_added TEXT NOT NULL,
+    date_added TEXT, --Aparentemente algum nao tem date_added
     release_year INTEGER NOT NULL,
     duration INTEGER NOT NULL,
     --TODO
-    rating TEXT, -- CHECK(rating IN (...))
-    type TEXT CHECK(type IN ('M', 'S'))
+    rating TEXT, --CHECK(rating IN ('TV-Y', 'TV-Y7', 'TV-Y7-FV', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA', 'PG-13', 'PG', 'R', 'G', 'NC-17', 'NR', 'UR')),
+    type TEXT CHECK(type IN ('Movie', 'TV Show'))
 );
 
 
@@ -75,6 +77,6 @@ CREATE TABLE review (
     total_votes INTEGER,
     review_date TEXT,
     spoiler INTEGER CHECK (spoiler = 0 OR spoiler = 1),
-    reviewer INTEGER REFERENCES reviewer(id)
+    reviewer_id INTEGER REFERENCES reviewer(id)
 );
 
