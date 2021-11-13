@@ -16,16 +16,16 @@ data/imdb-review-dataset.zip: data
 	kaggle datasets download --path data -d ebiswas/imdb-review-dataset
 	touch $@
 
-data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles.csv reviews.py
+data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles.csv scripts/reviews.py
 	unzip -n data/imdb-review-dataset.zip -d data
-	python3 reviews.py
+	python3 scripts/reviews.py
 
 
-data/reviews_clean.csv: data/reviews.csv cleanup_reviews.py
-	python3 cleanup_reviews.py
+data/reviews_clean.csv: data/reviews.csv scripts/cleanup_reviews.py
+	python3 scripts/cleanup_reviews.py
 
-data/netflix_titles_clean.csv: data/netflix_titles.csv cleanup_netflix.py
-	python3 cleanup_netflix.py
+data/netflix_titles_clean.csv: data/netflix_titles.csv scripts/cleanup_netflix.py
+	python3 scripts/cleanup_netflix.py
 
 
 .PHONY: cleanjson
