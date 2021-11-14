@@ -25,21 +25,19 @@ netflix.rename(columns={'rating': 'audience_rating'}, inplace=True)
 if args.min_release_year is not None:
     netflix = netflix[netflix["release_year"] > args.min_release_year]
 
-titles = netflix["title"]
-
 pd.DataFrame().to_csv(DATA_PATH + "reviews.csv", index=False, mode="w")
 
 for index, file in enumerate(inputs):
-    print("Started processing", file)
+    print(f'[{index+1}/{len(inputs)}] Processing {file}  ...  ', end='', flush=True)
     reviews = pd.read_json(DATA_PATH + file)
 
     # Remove years at the end of the movies names
     reviews["movie"].replace(" \([1-9]*.*", "", regex=True, inplace=True)
 
     # Merge to filter shows that are not on Netlix and add the respective show_id
-    filtered = pd.merge(reviews, titles, left_on = ['movie'], right_on = ['title'], how='right')
+    filtered = pd.merge(reviews, netflix, left_on=['movie'], right_on=['title'], how='inner')
 
-    cols_to_del = list(titles.columns)
+    cols_to_del = list(netflix.columns)
     cols_to_del.remove('show_id')
 
     filtered.drop(columns=cols_to_del, inplace=True)
@@ -47,7 +45,5 @@ for index, file in enumerate(inputs):
     # Append to the result csv
     filtered.to_csv(DATA_PATH + "reviews.csv", index=False,
                    header=(index == 0), mode="a")
-    print("Finished processing", file)
 
-
-print("Finished")
+    print("Finished")
