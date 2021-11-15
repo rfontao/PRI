@@ -7,11 +7,17 @@ import regex
 plt.style.use('netflix.mplstyle')
 palette = {'primary': '#221f1f', 'secondary': '#b20710', 'accent': '#e50914', 'tertiary': '#f5f5f1'}
 
-reviews = pd.read_csv('data/reviews_clean.csv', index_col='review_id')
-reviews.head()
+print('Reading datasets [--]', end='', flush=True)
 
 netflix = pd.read_csv('data/netflix_titles_clean.csv', index_col='show_id')
 netflix.head()
+
+print('\rReading datasets [X-]', end='', flush=True)
+
+reviews = pd.read_csv('data/reviews_clean.csv', index_col='review_id')
+reviews.head()
+
+print('\rReading datasets [XX]')
 
 movies = netflix[netflix['type']=='Movie']
 shows = netflix[netflix['type']=='TV Show']
@@ -19,6 +25,8 @@ shows = netflix[netflix['type']=='TV Show']
 # ----------------------------
 #       NETFLIX DATA
 # ----------------------------
+
+print('\rCreating plots [----------]', end='', flush=True)
 
 def maturity_rating_distribution():
     fig, ax = plt.subplots()
@@ -37,6 +45,7 @@ def maturity_rating_distribution():
     plt.savefig('images/svg/maturity_rating_distribution.svg', format="svg")
     plt.savefig('images/png/maturity_rating_distribution.png', format="png", dpi=150, bbox_inches="tight")
 maturity_rating_distribution()
+print('\rCreating plots [X---------]', end='', flush=True)
 
 
 def genre_distribution():
@@ -75,6 +84,7 @@ def genre_distribution():
     plt.savefig('images/svg/genre_distribution.svg', format="svg")
     plt.savefig('images/png/genre_distribution.png', format="png", dpi=150, bbox_inches="tight")
 genre_distribution()
+print('\rCreating plots [XX--------]', end='', flush=True)
 
 
 def country_distribution():
@@ -118,6 +128,7 @@ def country_distribution():
     plt.savefig('images/svg/country_distribution.svg', format="svg")
     plt.savefig('images/png/country_distribution.png', format="png", dpi=150, bbox_inches="tight")
 country_distribution()
+print('\rCreating plots [XXX-------]', end='', flush=True)
 
 
 def duration_distribution():
@@ -138,6 +149,7 @@ def duration_distribution():
     plt.savefig('images/svg/duration_distribution.svg', format="svg")
     plt.savefig('images/png/duration_distribution.png', format="png", dpi=150, bbox_inches="tight")
 duration_distribution()
+print('\rCreating plots [XXXX------]', end='', flush=True)
 
 
 
@@ -152,6 +164,9 @@ movie_total_reviews = reviews.groupby(['movie'])['rating'].count()
 
 movie_scores = pd.concat({'mean': movie_mean_scores, 'n_reviews': movie_total_reviews}, axis=1)
 
+reviews['review_detail_word_count'] = reviews.loc[:, 'review_detail'].apply(lambda s: len(pattern.findall(s)))
+
+
 def score_distribution():
     fig, ax = plt.subplots()
     sns.histplot(movie_scores['mean'], kde=True, color=palette['secondary'], ax=ax)
@@ -163,6 +178,7 @@ def score_distribution():
     plt.savefig('images/svg/score_distribution.svg', format="svg")
     plt.savefig('images/png/score_distribution.png', format="png", dpi=150, bbox_inches="tight")
 score_distribution()
+print('\rCreating plots [XXXXX-----]', end='', flush=True)
 
 
 def rating_distribution():
@@ -179,6 +195,7 @@ def rating_distribution():
     plt.savefig('images/svg/rating_distribution.svg', format="svg")
     plt.savefig('images/png/rating_distribution.png', format="png", dpi=150, bbox_inches="tight")
 rating_distribution()
+print('\rCreating plots [XXXXXX----]', end='', flush=True)
 
 
 def spoiler_percentage():
@@ -203,11 +220,10 @@ def spoiler_percentage():
     plt.savefig('images/svg/spoiler_percentage.svg', format="svg")
     plt.savefig('images/png/spoiler_percentage.png', format="png", dpi=150, bbox_inches="tight")
 spoiler_percentage()
+print('\rCreating plots [XXXXXXX---]', end='', flush=True)
 
 
 def word_count_distribution():
-    reviews['review_detail_word_count'] = reviews.loc[:, 'review_detail'].apply(lambda s: len(pattern.findall(s)))
-
     fig, ax = plt.subplots()
     sns.histplot(reviews['review_detail_word_count'], kde=True, color=palette['secondary'], ax=ax, bins='doane')
 
@@ -220,6 +236,7 @@ def word_count_distribution():
     plt.savefig('images/svg/word_count_distribution.svg', format="svg")
     plt.savefig('images/png/word_count_distribution.png', format="png", dpi=150, bbox_inches="tight")
 word_count_distribution()
+print('\rCreating plots [XXXXXXXX--]', end='', flush=True)
 
 
 def word_count_boxplot():
@@ -232,6 +249,7 @@ def word_count_boxplot():
     plt.savefig('images/svg/word_count_boxplot.svg', format="svg")
     plt.savefig('images/png/word_count_boxplot.png', format="png", dpi=150, bbox_inches="tight")
 word_count_boxplot()
+print('\rCreating plots [XXXXXXXXX-]', end='', flush=True)
 
 
 def reviews_distribution():
@@ -251,3 +269,4 @@ def reviews_distribution():
     plt.savefig('images/svg/reviews_distribution.svg', format="svg")
     plt.savefig('images/png/reviews_distribution.png', format="png", dpi=150, bbox_inches="tight")
 reviews_distribution()
+print('\rCreating plots [XXXXXXXXXX]')

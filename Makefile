@@ -30,8 +30,10 @@ data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles_clean.csv scr
 data/reviews_clean.csv: data/reviews.csv scripts/cleanup_reviews.py
 	python3 scripts/cleanup_reviews.py
 
+images:
+	mkdir $@
 
-images/.plots: data/netflix_titles_clean.csv data/reviews_clean.csv scripts/gen_plots.py
+images/.plots: images data/netflix_titles_clean.csv data/reviews_clean.csv scripts/gen_plots.py
 	python3 scripts/gen_plots.py
 	touch images/.plots
 
