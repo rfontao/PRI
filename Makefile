@@ -20,12 +20,12 @@ data/imdb-review-dataset.zip: data
 
 
 data/netflix_titles_clean.csv: data/netflix_titles.csv scripts/cleanup_netflix.py
-	python3 scripts/cleanup_netflix.py
+	python3 scripts/cleanup_netflix.py -y $(MIN_SHOW_YEAR)
 
 
 data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles_clean.csv scripts/filter_reviews.py
 	unzip -n data/imdb-review-dataset.zip -d data
-	python3 scripts/filter_reviews.py -y $(MIN_SHOW_YEAR)
+	python3 scripts/filter_reviews.py
 
 data/reviews_clean.csv: data/reviews.csv scripts/cleanup_reviews.py
 	python3 scripts/cleanup_reviews.py
