@@ -1,7 +1,7 @@
 MIN_SHOW_YEAR:=1200
 
 .PHONY: all
-all: data/reviews_clean.csv data/netflix_titles_clean.csv
+all: data/reviews_clean.csv data/netflix_titles_clean.csv images/.plots
 
 data:
 	mkdir $@
@@ -29,6 +29,11 @@ data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles_clean.csv scr
 
 data/reviews_clean.csv: data/reviews.csv scripts/cleanup_reviews.py
 	python3 scripts/cleanup_reviews.py
+
+
+images/.plots: data/netflix_titles_clean.csv data/reviews_clean.csv scripts/gen_plots.py
+	python3 scripts/gen_plots.py
+	touch images/.plots
 
 
 .PHONY: cleanjson
