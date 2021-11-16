@@ -29,21 +29,23 @@ shows = netflix[netflix['type']=='TV Show']
 print('\rCreating plots [----------]', end='', flush=True)
 
 def maturity_rating_distribution():
+    netflix_maturity_ratings = ('TV-Y', 'TV-Y7', 'TV-Y7-FV', 'G', 'TV-G', 'PG', 'TV-PG', 'PG-13', 'TV-14', 'R', 'TV-MA', 'NC-17')
+
     fig, ax = plt.subplots()
-    movies['rating'].value_counts().plot(kind='bar', ax=ax, alpha=0.75, color=palette['secondary'], label='Movies')
-    shows['rating'].value_counts().plot(kind='bar', ax=ax, label='TV Shows')
+
+    sns.countplot(x="rating", hue="type", data=netflix, ax=ax, order=netflix_maturity_ratings)
 
     ax.set_title('Titles by maturity rating')
     ax.set_xlabel('Maturity rating')
     ax.set_ylabel('Count')
 
-    ax.bar_label(ax.containers[0])
-    ax.bar_label(ax.containers[1], color=palette['tertiary'])
+    for container in ax.containers:
+        ax.bar_label(container)
 
     ax.legend()
 
-    plt.savefig('images/svg/maturity_rating_distribution.svg', format="svg")
-    plt.savefig('images/png/maturity_rating_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/maturity_rating_distribution.svg', format="svg")
+    fig.savefig('images/png/maturity_rating_distribution.png', format="png", dpi=150, bbox_inches="tight")    
 maturity_rating_distribution()
 print('\rCreating plots [X---------]', end='', flush=True)
 
@@ -71,7 +73,7 @@ def genre_distribution():
     ax2.set_xlabel('Genres')
     ax2.set_ylabel('Count')
 
-    genre_movie.sort_values(ascending=False).plot(kind='bar', ax=ax1, color=palette['secondary'])
+    genre_movie.sort_values(ascending=False).plot(kind='bar', ax=ax1, color=palette['primary'])
     ax1.set_title('Genre distribution on Movies')
     ax1.set_xlabel('Genres')
     ax1.set_ylabel('Count')
@@ -81,8 +83,8 @@ def genre_distribution():
     for container in ax2.containers:
         ax2.bar_label(container)
 
-    plt.savefig('images/svg/genre_distribution.svg', format="svg")
-    plt.savefig('images/png/genre_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/genre_distribution.svg', format="svg")
+    fig.savefig('images/png/genre_distribution.png', format="png", dpi=150, bbox_inches="tight")
 genre_distribution()
 print('\rCreating plots [XX--------]', end='', flush=True)
 
@@ -115,7 +117,7 @@ def country_distribution():
     ax2.set_xlabel('Countries')
     ax2.set_ylabel('Count')
 
-    country_movie.nlargest(20).plot(kind='bar', ax=ax1, color=palette['secondary'])
+    country_movie.nlargest(20).plot(kind='bar', ax=ax1, color=palette['primary'])
     ax1.set_title('Top 20 most frequent countries on Movies')
     ax1.set_xlabel('Countries')
     ax1.set_ylabel('Count')
@@ -125,8 +127,8 @@ def country_distribution():
     for container in ax2.containers:
         ax2.bar_label(container)
 
-    plt.savefig('images/svg/country_distribution.svg', format="svg")
-    plt.savefig('images/png/country_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/country_distribution.svg', format="svg")
+    fig.savefig('images/png/country_distribution.png', format="png", dpi=150, bbox_inches="tight")
 country_distribution()
 print('\rCreating plots [XXX-------]', end='', flush=True)
 
@@ -135,7 +137,7 @@ def duration_distribution():
     fig, axs = plt.subplots(1, 2, figsize=(12, 4))
     ax1, ax2 = axs
 
-    sns.histplot(movies['duration'], bins=20, ax=ax1, kde=True, color=palette['secondary'])
+    sns.histplot(movies['duration'], bins=20, ax=ax1, kde=True, color=palette['primary'])
     ax1.set_title('Movies by duration')
     ax1.set_xlabel('Duration (min)')
 
@@ -146,8 +148,8 @@ def duration_distribution():
     for container in ax2.containers:
         ax2.bar_label(container)
 
-    plt.savefig('images/svg/duration_distribution.svg', format="svg")
-    plt.savefig('images/png/duration_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/duration_distribution.svg', format="svg")
+    fig.savefig('images/png/duration_distribution.png', format="png", dpi=150, bbox_inches="tight")
 duration_distribution()
 print('\rCreating plots [XXXX------]', end='', flush=True)
 
@@ -175,8 +177,8 @@ def score_distribution():
     ax.set_xlabel('Score')
     ax.set_xticks(range(1, 11))
 
-    plt.savefig('images/svg/score_distribution.svg', format="svg")
-    plt.savefig('images/png/score_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/score_distribution.svg', format="svg")
+    fig.savefig('images/png/score_distribution.png', format="png", dpi=150, bbox_inches="tight")
 score_distribution()
 print('\rCreating plots [XXXXX-----]', end='', flush=True)
 
@@ -192,8 +194,8 @@ def rating_distribution():
     for container in ax.containers:
         ax.bar_label(container)
 
-    plt.savefig('images/svg/rating_distribution.svg', format="svg")
-    plt.savefig('images/png/rating_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/rating_distribution.svg', format="svg")
+    fig.savefig('images/png/rating_distribution.png', format="png", dpi=150, bbox_inches="tight")
 rating_distribution()
 print('\rCreating plots [XXXXXX----]', end='', flush=True)
 
@@ -217,8 +219,8 @@ def spoiler_percentage():
 
     ax.axis('off')
 
-    plt.savefig('images/svg/spoiler_percentage.svg', format="svg")
-    plt.savefig('images/png/spoiler_percentage.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/spoiler_percentage.svg', format="svg")
+    fig.savefig('images/png/spoiler_percentage.png', format="png", dpi=150, bbox_inches="tight")
 spoiler_percentage()
 print('\rCreating plots [XXXXXXX---]', end='', flush=True)
 
@@ -233,22 +235,23 @@ def word_count_distribution():
     ax.set_xlabel('Number of words in the review')
     ax.set_ylabel('Count')
 
-    plt.savefig('images/svg/word_count_distribution.svg', format="svg")
-    plt.savefig('images/png/word_count_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/word_count_distribution.svg', format="svg")
+    fig.savefig('images/png/word_count_distribution.png', format="png", dpi=150, bbox_inches="tight")
 word_count_distribution()
 print('\rCreating plots [XXXXXXXX--]', end='', flush=True)
 
 
-def word_count_boxplot():
-    ax = sns.boxplot(x='rating', y='review_detail_word_count', data=reviews)
+def word_count_violinplot():
+    fig, ax = plt.subplots()
+
+    sns.violinplot(x='rating', y='review_detail_word_count', data=reviews, kind="violin", ax=ax)
     ax.set_title('Word count per review rating')
     ax.set_xlabel('Rating')
     ax.set_ylabel('Word count')
-    # ax.set_ylim(None, 750)
 
-    plt.savefig('images/svg/word_count_boxplot.svg', format="svg")
-    plt.savefig('images/png/word_count_boxplot.png', format="png", dpi=150, bbox_inches="tight")
-word_count_boxplot()
+    fig.savefig('images/svg/word_count_violinplot.svg', format="svg")
+    fig.savefig('images/png/word_count_violinplot.png', format="png", dpi=150, bbox_inches="tight")
+word_count_violinplot()
 print('\rCreating plots [XXXXXXXXX-]', end='', flush=True)
 
 
@@ -266,7 +269,7 @@ def reviews_distribution():
     for container in ax.containers:
         ax.bar_label(container)
 
-    plt.savefig('images/svg/reviews_distribution.svg', format="svg")
-    plt.savefig('images/png/reviews_distribution.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig('images/svg/reviews_distribution.svg', format="svg")
+    fig.savefig('images/png/reviews_distribution.png', format="png", dpi=150, bbox_inches="tight")
 reviews_distribution()
 print('\rCreating plots [XXXXXXXXXX]')
