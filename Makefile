@@ -42,7 +42,6 @@ images:
 images/.plots: images/svg images/png data/netflix_titles_clean.csv data/reviews_clean.csv scripts/gen_plots.py
 	python3 scripts/gen_plots.py
 	touch images/.plots
-	touch images/png/.png
 
 
 .PHONY: cleanjson
