@@ -1,7 +1,8 @@
 MIN_SHOW_YEAR:=1200
 
 .PHONY: all
-all: data/reviews_clean.csv data/netflix_titles_clean.csv images/.plots
+all: data/reviews_clean.csv data/netflix_titles_clean.csv images/.plots sql/db.sql
+
 
 data:
 	mkdir $@
@@ -42,6 +43,13 @@ images:
 images/.plots: images/svg images/png data/netflix_titles_clean.csv data/reviews_clean.csv scripts/gen_plots.py
 	python3 scripts/gen_plots.py
 	touch images/.plots
+
+
+sql:
+	mkdir -p $@
+
+sql/db.sql: sql scripts/gen_db.py
+	python3 scripts/gen_db.py
 
 
 .PHONY: cleanjson
