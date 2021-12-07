@@ -1,0 +1,64 @@
+{
+    "mappings": {
+        "properties": {
+            "type": {
+                "type": "keyword"
+            },
+            "title": {
+                "type": "text"
+            },
+            "cast": {
+                "type": "text"
+            },
+            "country": {
+                "type": "keyword"
+            },
+            "date_added": {
+                "type": "date"
+            },
+            "release_year": {
+                "type": "short"
+            },
+            "rating": {
+                "type": "keyword"
+            },
+            "listed_in": {
+                "type": "keyword"
+            },
+            "description": {
+                "type": "text"
+            },
+            "reviews": {
+                "properties": {
+                    "reviewer": {
+                        "type": "keyword"
+                    },
+                    "rating": {
+                        "type": "short"
+                    },
+                    "review_summary": {
+                        "type": "text"
+                    },
+                    "review_detail": {
+                        "type": "text"
+                    },
+                    "spoiler_tag": {
+                        "type": "boolean"
+                    },
+                    "review_date": {
+                        "type": "date"
+                    },
+                    "total": {
+                        "type": "integer"
+                    },
+                    "helpful": {
+                        "type": "text"
+                    },
+                    "unhelpful": {
+                        "type": "text"
+                    }
+                }
+            }
+        }
+    }
+}
