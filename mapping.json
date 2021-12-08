@@ -9,13 +9,16 @@
                 "type": "keyword"
             },
             "title": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "standard"
             },
             "directors": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "standard"
             },
             "cast": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "standard"
             },
             "countries": {
                 "type": "keyword"
@@ -36,7 +39,8 @@
                 "type": "keyword"
             },
             "description": {
-                "type": "text"
+                "type": "text",
+                "analyzer": "standard"
             },
             "reviews": {
                 "properties": {
@@ -51,10 +55,12 @@
                         "type": "short"
                     },
                     "review_summary": {
-                        "type": "text"
+                        "type": "text",
+                        "analyzer": "standard"
                     },
                     "review_detail": {
-                        "type": "text"
+                        "type": "text",
+                        "analyzer": "standard"
                     },
                     "spoiler_tag": {
                         "type": "boolean"
