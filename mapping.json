@@ -2,8 +2,7 @@
     "mappings": {
         "properties": {
             "show_id": {
-                "type": "integer",
-                "index": false
+                "type": "integer"
             },
             "type": {
                 "type": "keyword"
@@ -45,8 +44,7 @@
             "reviews": {
                 "properties": {
                     "review_id": {
-                        "type": "integer",
-                        "index": false
+                        "type": "integer"
                     },
                     "reviewer": {
                         "type": "keyword"
