@@ -1,16 +1,23 @@
 {
     "mappings": {
         "properties": {
+            "show_id": {
+                "type": "integer",
+                "index": false
+            },
             "type": {
                 "type": "keyword"
             },
             "title": {
                 "type": "text"
             },
+            "directors": {
+                "type": "text"
+            },
             "cast": {
                 "type": "text"
             },
-            "country": {
+            "countries": {
                 "type": "keyword"
             },
             "date_added": {
@@ -19,10 +26,13 @@
             "release_year": {
                 "type": "short"
             },
+            "duration": {
+                "type": "short"
+            },
             "rating": {
                 "type": "keyword"
             },
-            "listed_in": {
+            "genres": {
                 "type": "keyword"
             },
             "description": {
@@ -30,6 +40,10 @@
             },
             "reviews": {
                 "properties": {
+                    "review_id": {
+                        "type": "integer",
+                        "index": false
+                    },
                     "reviewer": {
                         "type": "keyword"
                     },
@@ -52,10 +66,10 @@
                         "type": "integer"
                     },
                     "helpful": {
-                        "type": "text"
+                        "type": "integer"
                     },
                     "unhelpful": {
-                        "type": "text"
+                        "type": "integer"
                     }
                 }
             }
