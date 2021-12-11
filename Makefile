@@ -1,11 +1,11 @@
 MIN_SHOW_YEAR:=1200
 
 .PHONY: all
-all: data/reviews_clean.csv data/netflix_titles_clean.csv images/.plots sql/db.sql
+all: data/json/netflix.json images/.plots sql/db.sql
 
 
 data:
-	mkdir $@
+	mkdir -p $@
 
 data/netflix-shows.zip: data
 	kaggle datasets download --path data -d shivamb/netflix-shows
@@ -30,6 +30,12 @@ data/reviews.csv: data/imdb-review-dataset.zip data/netflix_titles_clean.csv scr
 
 data/reviews_clean.csv: data/reviews.csv scripts/cleanup_reviews.py
 	python3 scripts/cleanup_reviews.py
+
+data/json: data
+	mkdir -p $@
+
+data/json/netflix.json: json data/netflix_titles_clean.csv data/reviews_clean.csv
+	python3 scripts/merge_to_json.py
 
 images/svg: images
 	mkdir -p $@
