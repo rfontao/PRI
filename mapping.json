@@ -10,15 +10,15 @@
             },
             "title": {
                 "type": "text",
-                "analyzer": "standard"
+                "analyzer": "standard_folding"
             },
             "directors": {
                 "type": "text",
-                "analyzer": "standard"
+                "analyzer": "standard_folding"
             },
             "cast": {
                 "type": "text",
-                "analyzer": "standard"
+                "analyzer": "standard_folding"
             },
             "countries": {
                 "type": "keyword"
@@ -42,7 +42,7 @@
             },
             "description": {
                 "type": "text",
-                "analyzer": "standard"
+                "analyzer": "standard_folding"
             },
             "reviews": {
                 "properties": {
@@ -60,11 +60,11 @@
                     },
                     "review_summary": {
                         "type": "text",
-                        "analyzer": "standard"
+                        "analyzer": "standard_folding"
                     },
                     "review_detail": {
                         "type": "text",
-                        "analyzer": "standard"
+                        "analyzer": "standard_folding"
                     },
                     "spoiler_tag": {
                         "type": "boolean",
@@ -86,6 +86,20 @@
                         "type": "integer",
                         "index": false
                     }
+                }
+            }
+        }
+    },
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "standard_folding": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding"
+                    ]
                 }
             }
         }
