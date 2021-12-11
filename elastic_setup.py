@@ -17,7 +17,7 @@ def generate_actions():
                 "_id": doc["show_id"],
                 '_op_type': 'index',
                 '_index': INDEX_NAME,
-                'doc': doc
+                '_source': doc
             }
 
             yield action
@@ -26,7 +26,8 @@ def generate_actions():
 if __name__ == "__main__":
     # instantiate the elastic search client
     es = Elasticsearch(
-        hosts=[{'host': "localhost", 'port': 9200}]
+        hosts=[{'host': "localhost", 'port': 9200}],
+        timeout=150
     )
 
     # Create index and mapping
@@ -34,9 +35,11 @@ if __name__ == "__main__":
 
     if not es.indices.exists(index=INDEX_NAME):
         print("Index '" + INDEX_NAME + "' doesn't exist. Creating...")
-        es.indices.create(index=INDEX_NAME, mappings=mapping)
+        es.indices.create(index=INDEX_NAME, body=mapping)
     else:
-        print("Index '" + INDEX_NAME + "' already exists. Skipping creation...")
+        es.indices.delete(index=INDEX_NAME)
+        es.indices.create(index=INDEX_NAME, body=mapping)
+        print("Index '" + INDEX_NAME + "' already exists. Recreating...")
 
     # data = json.load(open("data/json/netflix_test.json", "r"))
     # start = time.time()

@@ -2,7 +2,8 @@
     "mappings": {
         "properties": {
             "show_id": {
-                "type": "integer"
+                "type": "integer",
+                "index": false
             },
             "type": {
                 "type": "keyword"
@@ -23,13 +24,15 @@
                 "type": "keyword"
             },
             "date_added": {
-                "type": "date"
+                "type": "date",
+                "index": false
             },
             "release_year": {
                 "type": "short"
             },
             "duration": {
-                "type": "short"
+                "type": "short",
+                "index": false
             },
             "rating": {
                 "type": "keyword"
@@ -44,13 +47,16 @@
             "reviews": {
                 "properties": {
                     "review_id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "index": false
                     },
                     "reviewer": {
-                        "type": "keyword"
+                        "type": "keyword",
+                        "index": false
                     },
                     "rating": {
-                        "type": "short"
+                        "type": "short",
+                        "index": false
                     },
                     "review_summary": {
                         "type": "text",
@@ -61,19 +67,24 @@
                         "analyzer": "standard"
                     },
                     "spoiler_tag": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "index": false
                     },
                     "review_date": {
-                        "type": "date"
+                        "type": "date",
+                        "index": false
                     },
                     "total": {
-                        "type": "integer"
+                        "type": "integer",
+                        "index": false
                     },
                     "helpful": {
-                        "type": "integer"
+                        "type": "integer",
+                        "index": false
                     },
                     "unhelpful": {
-                        "type": "integer"
+                        "type": "integer",
+                        "index": false
                     }
                 }
             }
