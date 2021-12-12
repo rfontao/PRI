@@ -34,7 +34,7 @@
                 "type": "short",
                 "index": false
             },
-            "rating": {
+            "age_rating": {
                 "type": "keyword"
             },
             "genres": {

@@ -28,6 +28,7 @@ merged_df = netflix.merge(
 )
 
 merged_df['avg_rating'] = reviews.groupby(by=['show_id'])['rating'].agg('mean')
+merged_df.rename(columns={'rating_x': 'age_rating', 'rating_y': 'avg_rating'}, inplace=True)
 
 # Save final document
 merged_df.loc[:,:].to_json(path_or_buf='./data/json/netflix.json', orient='records')
