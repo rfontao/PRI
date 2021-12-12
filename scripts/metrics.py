@@ -22,25 +22,22 @@ query_results = [
     ['R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
 ]
 
-# METRICS TABLE
-# Define custom decorator to automatically calculate metric based on key
-# metrics = {}
-# def metric(f): return metrics.setdefault(f.__name__, f)
+
+def ap(results):
+    """Average Precision"""
+    precision_values = [
+        (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN)
+    ]
+    return sum(precision_values)/len(precision_values)
 
 
-# @metric
-# def ap(results):
-#     """Average Precision"""
-#     precision_values = [
-#         (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN)
-#     ]
-#     return sum(precision_values)/len(precision_values)
+def p10(results):
+    """Precision at N"""
+    return results[:RESULT_LEN].count("R")/10
 
-
-# @metric
-# def p10(results, n=10):
-#     """Precision at N"""
-#     return results[:RESULT_LEN].count("R")/n
+def r10(results):
+    """Precision at N"""
+    return results[:RESULT_LEN].count("R")/results.count("R")
 
 
 # def calculate_metric(key, results):
@@ -73,6 +70,12 @@ labels = [
 for i in range(len(query_results)):
 
     results = query_results[i]
+
+    print("P@10:", p10(results))
+    print("R@10:", r10(results))
+    print("AP:", ap(results))
+    print("-----------------")
+
 
     # PRECISION-RECALL CURVE
     # Calculate precision and recall values as we move down the ranked list
