@@ -9,7 +9,7 @@ INDEX_NAME = "index"
 def generate_actions():
 
     # https://elasticsearch-py.readthedocs.io/en/v7.16.0/helpers.html
-    with open("data/json/netflix_test.json", mode="r") as f:
+    with open("data/json/netflix.json", mode="r") as f:
         data = json.load(f)
 
         for doc in data:

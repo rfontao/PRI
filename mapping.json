@@ -38,7 +38,8 @@
                 "type": "keyword"
             },
             "genres": {
-                "type": "keyword"
+                "type": "text",
+                "analyzer": "standard_folding"
             },
             "description": {
                 "type": "text",
