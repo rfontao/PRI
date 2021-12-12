@@ -44,6 +44,10 @@
                 "type": "text",
                 "analyzer": "standard_folding"
             },
+            "avg_rating": {
+                "type": "double",
+                "index": false
+            },
             "reviews": {
                 "properties": {
                     "review_id": {
