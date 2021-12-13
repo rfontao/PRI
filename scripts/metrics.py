@@ -6,12 +6,21 @@ import json
 import requests
 import pandas as pd
 
+plt.style.use("netflix.mplstyle")
+
 RESULT_LEN = 10
 # SEARCH NEED 2
+query_results = [
+    ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
+    ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
+    ['R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+]
+
+# SEARCH NEED 3
 # query_results = [
-#     ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
-#     ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
-#     ['R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+#     ['R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R'],
+#     ['R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N'],
+#     ['R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
 # ]
 
 
@@ -38,6 +47,8 @@ def make_metrics_plots(query_results, prefix):
         "Retrieval Method 2",
         "Retrieval Method 3",
     ]
+    ls = ["-", "-", "-"]
+
     for i in range(len(query_results)):
 
         results = query_results[i]
@@ -76,12 +87,15 @@ def make_metrics_plots(query_results, prefix):
 
         disp = PrecisionRecallDisplay(
             [precision_recall_match.get(r) for r in recall_values], recall_values)
-        disp.plot(ax=ax, label=labels[i])
+        disp.plot(ax=ax, label=labels[i], ls=ls[i])
 
 
     ax.set_ylim((-0.05, 1.05))
     ax.set_title("Precision-Recall Curve")
     ax.legend()
     # plt.show()
-    fig.savefig(f'../images/svg/{prefix}_precision_recall.svg', format="svg")
-    fig.savefig(f'../images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig(f'images/svg/{prefix}_precision_recall.svg', format="svg")
+    fig.savefig(f'images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
+
+if __name__ == "__main__":
+    make_metrics_plots(query_results, "search_2")
