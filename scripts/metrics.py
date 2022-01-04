@@ -27,8 +27,10 @@ query_results = [
 def ap(results):
     """Average Precision"""
     precision_values = [
-        (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN)
+        (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN + 1) if results[idx - 1] == "R"
     ]
+    print(precision_values)
+
     return sum(precision_values)/len(precision_values)
 
 
@@ -47,7 +49,7 @@ def make_metrics_plots(query_results, prefix):
         "Retrieval Method 2",
         "Retrieval Method 3",
     ]
-    ls = ["-", "-", "-"]
+    ls = ["-", ":", "-"]
 
     for i in range(len(query_results)):
 
