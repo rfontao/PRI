@@ -10,18 +10,18 @@ plt.style.use("netflix.mplstyle")
 
 RESULT_LEN = 10
 # SEARCH NEED 2
-query_results = [
-    ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
-    ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
-    ['R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
-]
+# query_results = [
+#     ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
+#     ['R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R'],
+#     ['R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+# ]
 
 # SEARCH NEED 3
-# query_results = [
-#     ['R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R'],
-#     ['R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N'],
-#     ['R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
-# ]
+query_results = [
+    ['R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R'],
+    ['R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N'],
+    ['R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+]
 
 
 def ap(results):
@@ -64,11 +64,12 @@ def make_metrics_plots(query_results, prefix):
         # PRECISION-RECALL CURVE
         # Calculate precision and recall values as we move down the ranked list
         precision_values = [
-            (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN)
+            (results[:idx].count("R") / idx) for idx in range(1, RESULT_LEN + 1) if results[idx - 1] == "R"
         ]
 
         recall_values = [
-            (results[:idx].count("R") / results.count("R")) for idx in range(1, RESULT_LEN)
+            # (results[:idx].count("R") / results.count("R")) for idx in range(1, RESULT_LEN + 1) if results[idx - 1] == "R"
+            (results[:idx].count("R") / results[:RESULT_LEN].count("R")) for idx in range(1, RESULT_LEN + 1) if results[idx - 1] == "R"
         ]
 
         precision_recall_match = {k: v for k,
@@ -100,4 +101,4 @@ def make_metrics_plots(query_results, prefix):
     fig.savefig(f'images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
 
 if __name__ == "__main__":
-    make_metrics_plots(query_results, "search_2")
+    make_metrics_plots(query_results, "search_3")
