@@ -90,12 +90,21 @@
                     "unhelpful": {
                         "type": "integer",
                         "index": false
+                    },
+                    "language": {
+                        "type": "keyword"
+                    },
+                    "es": {
+                        "type":"text",
+                        "analyzer": "spanish"
                     }
+
                 }
             }
         }
     },
     "settings": {
+        "default_pipeline":"language-detection",
         "analysis": {
             "analyzer": {
                 "standard_folding": {

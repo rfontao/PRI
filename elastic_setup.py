@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # instantiate the elastic search client
     es = Elasticsearch(
         hosts=[{'host': "localhost", 'port': 9200}],
-        timeout=150
+        timeout=300
     )
 
     # Create index and mapping

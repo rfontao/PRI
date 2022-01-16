@@ -17,10 +17,17 @@ RESULT_LEN = 10
 # ]
 
 # SEARCH NEED 3
+# query_results = [
+#     ['R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R'],
+#     ['R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N'],
+#     ['R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+# ]
+
+# SEARCH NEED 4
+# first: spanish / second: default
 query_results = [
-    ['R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'R'],
-    ['R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N'],
-    ['R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N']
+    ['R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N'],
+    ['N', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N']
 ]
 
 
@@ -45,11 +52,11 @@ def r10(results):
 def make_metrics_plots(query_results, prefix):
     fig, ax = plt.subplots()
     labels = [
-        "Retrieval Method 1",
-        "Retrieval Method 2",
+        "Spanish",
+        "Default",
         "Retrieval Method 3",
     ]
-    ls = ["-", ":", "-"]
+    ls = ["-",  "-"]
 
     for i in range(len(query_results)):
 
@@ -101,4 +108,4 @@ def make_metrics_plots(query_results, prefix):
     fig.savefig(f'images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
 
 if __name__ == "__main__":
-    make_metrics_plots(query_results, "search_3")
+    make_metrics_plots(query_results, "search_4")
