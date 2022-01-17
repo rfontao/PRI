@@ -30,6 +30,13 @@ query_results = [
     ['N', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N']
 ]
 
+# SEARCH NEED 5
+# first: spanish / second: default
+query_results = [
+    ['R', 'R', 'N', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+    ['R', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N']
+]
+
 
 def ap(results):
     """Average Precision"""
@@ -108,4 +115,4 @@ def make_metrics_plots(query_results, prefix):
     fig.savefig(f'images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
 
 if __name__ == "__main__":
-    make_metrics_plots(query_results, "search_4")
+    make_metrics_plots(query_results, "search_5")
