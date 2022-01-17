@@ -10,7 +10,7 @@
             },
             "title": {
                 "type": "text",
-                "analyzer": "standard_folding"
+                "analyzer": "standard_folding_synset"
             },
             "directors": {
                 "type": "text",
@@ -39,11 +39,11 @@
             },
             "genres": {
                 "type": "text",
-                "analyzer": "standard_folding"
+                "analyzer": "standard_folding_synset"
             },
             "description": {
                 "type": "text",
-                "analyzer": "standard_folding"
+                "analyzer": "standard_folding_synset"
             },
             "avg_rating": {
                 "type": "double",
@@ -65,11 +65,11 @@
                     },
                     "review_summary": {
                         "type": "text",
-                        "analyzer": "standard_folding"
+                        "analyzer": "standard_folding_synset"
                     },
                     "review_detail": {
                         "type": "text",
-                        "analyzer": "standard_folding"
+                        "analyzer": "standard_folding_synset"
                     },
                     "spoiler_tag": {
                         "type": "boolean",
@@ -98,12 +98,64 @@
     "settings": {
         "analysis": {
             "analyzer": {
+                "standard_folding_synset": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding",
+                        "synonym"
+                    ]
+                },
                 "standard_folding": {
                     "type": "custom",
                     "tokenizer": "standard",
                     "filter": [
                         "lowercase",
                         "asciifolding"
+                    ]
+                }
+            },
+            "filter": {
+                "synonym": {
+                    "type": "synonym",
+                    "synonyms": [
+                        "movie, film, moving picture, motion picture",
+                        "tv show, television program, tv program, television show",
+
+                        "horror, scary, terror, fear",
+                        "anime, animated show, animated movie, cartoon, animation",
+                        "romantic, romance, love",
+                        "comedy, funny, humour, humor, emoji movie",
+                        "scifi, sci-fi, science fiction",
+                        "silent, mute, no sound, silence",
+                        "bollywood, indian movies, indian shows",
+                        "korean tv show, kdrama, kmovie, k-drama, k drama, korean drama, korean movie",
+                        "lgbt, lgbtq, gay, lesbian, bisexual, lgbtqia, lgbtqi, queer, transgender, trans, pansexual, asexual, intersex, lgbtqia+",
+                        "kids, family friendly, children, family, dominic toretto",
+                        "science, scientific",
+                        "independent, indie",
+                        "thriller, suspense",
+
+                        "samuel l jackson, motherfucker, mfer",
+
+                        "jojo, stando powah, za warudo, jotaro, dio, bizzare adventure",
+
+                        "robot, mecha, machine, automata, cyborg",
+
+                        "british, uk, u.k., united kingdom, england",
+                        "america, usa, united states of america, united states, guns, freedom",
+                        "spanish, latino",
+
+                        "ocean, sea, high seas, waters",
+                        "micro-plastics, polution, micro plastics",
+                        "with, and",
+
+                        "teen, teenager, adolescent, puberty",
+
+                        "father, dad",
+                        "mother, mom",
+                        "city, town"
                     ]
                 }
             }

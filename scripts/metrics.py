@@ -6,7 +6,7 @@ import json
 import requests
 import pandas as pd
 
-plt.style.use("netflix.mplstyle")
+plt.style.use("../netflix.mplstyle")
 
 RESULT_LEN = 10
 # SEARCH NEED 2
@@ -97,8 +97,8 @@ def make_metrics_plots(query_results, prefix):
     ax.set_title("Precision-Recall Curve")
     ax.legend()
     # plt.show()
-    fig.savefig(f'images/svg/{prefix}_precision_recall.svg', format="svg")
-    fig.savefig(f'images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
+    fig.savefig(f'../images/svg/{prefix}_precision_recall.svg', format="svg")
+    fig.savefig(f'../images/png/{prefix}_precision_recall.png', format="png", dpi=150, bbox_inches="tight")
 
 if __name__ == "__main__":
     make_metrics_plots(query_results, "search_3")

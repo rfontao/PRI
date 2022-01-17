@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, RequestError
 from elasticsearch.helpers import bulk
 import json
 import time
@@ -33,14 +33,17 @@ if __name__ == "__main__":
     # Create index and mapping
     mapping = json.load(open("mapping.json", "r"))
 
-    if not es.indices.exists(index=INDEX_NAME):
-        print("Index '" + INDEX_NAME + "' doesn't exist. Creating...")
-        es.indices.create(index=INDEX_NAME, body=mapping)
-    else:
-        es.indices.delete(index=INDEX_NAME)
-        es.indices.create(index=INDEX_NAME, body=mapping)
-        print("Index '" + INDEX_NAME + "' already exists. Recreating...")
-
+    try:
+        if not es.indices.exists(index=INDEX_NAME):
+            print("Index '" + INDEX_NAME + "' doesn't exist. Creating...")
+            es.indices.create(index=INDEX_NAME, body=mapping)
+        else:
+            es.indices.delete(index=INDEX_NAME)
+            es.indices.create(index=INDEX_NAME, body=mapping)
+            print("Index '" + INDEX_NAME + "' already exists. Recreating...")
+    except RequestError as e:
+        print(e.info)
+        exit()
     # data = json.load(open("data/json/netflix_test.json", "r"))
     # start = time.time()
     # for i in range(len(data)):
