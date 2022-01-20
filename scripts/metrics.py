@@ -26,7 +26,7 @@ RESULT_LEN = 10
 # SEARCH NEED 4
 # first: spanish / second: default
 query_results = [
-    ['R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N'],
+    ['R', 'R', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'N', 'N'],
     ['N', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N', 'N']
 ]
 
